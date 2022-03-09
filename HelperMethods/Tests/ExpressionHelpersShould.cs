@@ -27,15 +27,16 @@ namespace Tests
         }
 
         [Test]
-        public void ReturnExpressionExceptionForBadExpression()
+        [TestCase("Customer name", "x.BirthDate")]
+        public void ReturnExpressionExceptionForBadExpression(string firstName, string expression)
         {
             var sut = new ExpressionHelpers();
 
             var customer = new Customer
             {
-                FirstName = "Custnamer"
+                FirstName = firstName
             };
-            Assert.Throws<ExpressionException>(() => sut.ExpressionToValue<string, Customer>("x.BirthDate", customer));
+            Assert.Throws<ExpressionException>(() => sut.ExpressionToValue<string, Customer>(expression, customer));
         }
     }
 }
